@@ -2,24 +2,11 @@
 
 namespace View;
 
-require_once __DIR__ . "/Class/Register.php";
+require_once __DIR__ . "/Classes/Register.php";
 
-use Class\Register;
+use Classes\Register;
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $newRegister = new Register(
-        $_POST["username"],
-        $_POST["email"],
-        $_POST["password"],
-    );
-    $newRegister->register(
-        $_POST["username"],
-        $_POST["email"],
-        $_POST["password"]
-    );
-    header('Location: login_index.php');
-    //header("Refresh:0; url=page2.php");
-}
+
 
 
 ?>
@@ -44,6 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <div class="container">
         <h1 class="mb-3">Sign Up</h1>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $newRegister = new Register(
+                $_POST["username"],
+                $_POST["email"],
+                $_POST["password"],
+            );
+            $newRegister->register(
+                $_POST["username"],
+                $_POST["email"],
+                $_POST["password"]
+            );
+        }
+        ?>
         <form action="index.php" method="POST">
             <!-- Email input -->
             <div class="form-outline mb-4">
@@ -68,7 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <!-- Submit button -->
             <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
 
+
         </form>
+        <a href="login_index.php">
+            <button class="btn btn-primary btn-block">LOGIN</button></a>
     </div>
 
     <!-- Pills content -->

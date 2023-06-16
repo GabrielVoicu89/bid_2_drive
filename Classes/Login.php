@@ -1,12 +1,13 @@
 <?php
 
-namespace Class;
+namespace Classes;
 
 include_once __DIR__ . "/../DB/Database.php";
 
 use Db\Database;
 use PDO;
 
+session_start();
 class Login
 {
 
@@ -25,6 +26,7 @@ class Login
         $query = $dbh->prepare("SELECT * FROM `users` 
 WHERE `username` = ?
 ");
+
         $query->execute([$username]);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -32,7 +34,8 @@ WHERE `username` = ?
         if (count($result) > 0) {
             $password = $result[0]['password'];
             if ($password === $this->password) {
-                header("Location: auctions.index.php");
+                $_SESSION['userid'] = $result[0]['id'];
+                header("Location: car_index.php");
                 die();
             } else {
                 echo "<div class='alert alert-danger'>Password does not match.</div>";

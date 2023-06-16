@@ -2,9 +2,9 @@
 
 namespace View;
 
-require_once __DIR__ . "/Class/Login.php";
+require_once __DIR__ . "/Classes/Login.php";
 
-use Class\Login;
+use Classes\Login;
 
 
 ?>
@@ -25,8 +25,9 @@ use Class\Login;
 </head>
 
 <body>
-    <h1>LOGIN</h1>
+
     <div class="container">
+        <h1 class="mb-3">Login</h1>
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $newLogin = new Login(
                 $_POST["username"],
@@ -37,6 +38,7 @@ use Class\Login;
             );
         } ?>
         <form action="login_index.php" method="POST">
+
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <input type="text" id="form3Example2" class="form-control" name="username" required />
