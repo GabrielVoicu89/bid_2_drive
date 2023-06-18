@@ -5,9 +5,9 @@ namespace View;
 
 
 
-require_once __DIR__ . "/Classes/Car.php";
+require_once __DIR__ . "/Classes/CreateAuction.php";
 
-use Classes\Car;
+use Classes\CreateAuction;
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ use Classes\Car;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bid2DRive</title>
+    <title>Create Auction</title>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
@@ -27,18 +27,23 @@ use Classes\Car;
 </head>
 
 <body>
+    <?php
+    require_once __DIR__ . "/Menu/nav.php"
+    ?>
     <div class="container">
         <h1 class="mb-3">Create auction</h1>
         <?php
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $newCar = new Car(
+            $newCar = new CreateAuction(
                 $_POST["make"],
                 $_POST["model"],
                 $_POST["power"],
                 $_POST["year"],
                 $_POST["description"],
-                $_POST["price"]
+                $_POST["price"],
+                $_POST["auction_start"],
+                $_POST["auction_end"]
             );
 
             $newCar->create_auction(
@@ -48,11 +53,13 @@ use Classes\Car;
                 $_POST["year"],
                 $_POST["description"],
                 $_SESSION['userid'],
-                $_POST["price"]
+                $_POST["price"],
+                $_POST["auction_start"],
+                $_POST["auction_end"]
             );
         }
         ?>
-        <form action="car_index.php" method="POST">
+        <form action="createauction_index.php" method="POST">
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">
                 <div class="col">
@@ -75,23 +82,41 @@ use Classes\Car;
                 <label class="form-label" for="form6Example3">Power</label>
             </div>
 
-            <!-- Text input -->
+            <!-- Year input -->
             <div class="form-outline mb-4">
                 <input type="number" id="form6Example4" class="form-control" name="year" />
                 <label class="form-label" for="form6Example4">Year</label>
             </div>
 
-            <!-- Email input -->
+            <!-- Description input -->
             <div class="form-outline mb-4">
                 <textarea id="form6Example5" class="form-control" name="description"></textarea>
                 <label class="form-label" for="form6Example5">Description</label>
             </div>
 
-            <!-- Number input -->
+            <!-- Price input -->
             <div class="form-outline mb-4">
                 <input type="number" id="form6Example6" class="form-control" name="price" />
                 <label class="form-label" for="form6Example6">Price</label>
             </div>
+
+            <!-- Auction start input -->
+            <div class="mb-4">
+                <label class="form-label" for="form6Example7">Auction start</label>
+                <input type="datetime-local" id="form6Example6" class="form-control" name="auction_start" />
+
+            </div>
+
+            <!-- Auction end input -->
+            <div class="mb-4">
+                <label class="form-label" for="form6Example8">Auction end</label>
+                <input type="datetime-local" id="form6Example6" class="form-control" name="auction_end" />
+
+            </div>
+
+
+
+
 
 
 

@@ -25,7 +25,9 @@ use Classes\Login;
 </head>
 
 <body>
-
+<?php
+    require_once __DIR__."/Menu/nav.php"
+    ?>
     <div class="container">
         <h1 class="mb-3">Login</h1>
         <?php if ($_SERVER["REQUEST_METHOD"] === "POST") {

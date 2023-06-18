@@ -25,14 +25,13 @@ class Register
         $dbh = Database::createDBConnection();
 
         $query = $dbh->prepare("SELECT * FROM `users` 
-        WHERE `username` = ?
+        WHERE `username` = ? OR `email`= ?
         ");
-
-        $query->execute([$username]);
+        $query->execute([$username, $email]);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         if (count($result) > 0) {
-            echo "<div class='alert alert-danger'>Username already exist.</div>";
+            echo "<div class='alert alert-danger'>Username or email already exist.</div>";
         } else {
             $query = $dbh->prepare("INSERT 
             INTO `users` (`username`, `email`, `password`) VALUES (?,?,?) 

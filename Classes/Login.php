@@ -35,8 +35,7 @@ WHERE `username` = ?
             $password = $result[0]['password'];
             if ($password === $this->password) {
                 $_SESSION['userid'] = $result[0]['id'];
-                header("Location: car_index.php");
-                die();
+                header("Location: createauction_index.php");
             } else {
                 echo "<div class='alert alert-danger'>Password does not match.</div>";
             }

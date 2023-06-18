@@ -28,6 +28,9 @@ use Classes\Register;
 </head>
 
 <body>
+    <?php
+    require_once __DIR__."/Menu/nav.php"
+    ?>
 
     <div class="container">
         <h1 class="mb-3">Sign Up</h1>
