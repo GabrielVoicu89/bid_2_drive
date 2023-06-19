@@ -19,9 +19,10 @@ class CreateAuction
     protected $price;
     protected $auction_start;
     protected $auction_end;
+    protected $image;
 
 
-    public function __construct($make, $model, $power, $year, $description,  $price,  $auction_start, $auction_end)
+    public function __construct($make, $model, $power, $year, $description,  $price,  $auction_start, $auction_end, $image)
     {
         $this->make = $make;
         $this->model = $model;
@@ -31,18 +32,19 @@ class CreateAuction
         $this->price = $price;
         $this->auction_start = $auction_start;
         $this->auction_end = $auction_end;
+        $this->image = $image;
     }
 
 
-    public function create_auction($make, $model, $power, $year, $description, $seller_id, $price, $auction_start, $auction_end)
+    public function create_auction($make, $model, $power, $year, $description, $seller_id, $price, $auction_start, $auction_end, $image)
     {
         $dbh = Database::createDBConnection();
 
         //insert in cars
         $query = $dbh->prepare("INSERT 
-            INTO `cars` (`make`, `model`, `power`,`year`,`description`,`seller_id`,`price`, `auction_start` , `auction_end`) VALUES (?,?,?,?,?,?,?,?,?) 
+            INTO `cars` (`make`, `model`, `power`,`year`,`description`,`seller_id`,`price`, `auction_start` , `auction_end`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?) 
             ");
-        $query->execute([$make, $model, $power, $year, $description, $seller_id, $price, $auction_start, $auction_end]);
+        $query->execute([$make, $model, $power, $year, $description, $seller_id, $price, $auction_start, $auction_end, $image]);
     }
 }
 // var_export

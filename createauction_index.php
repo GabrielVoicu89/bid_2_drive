@@ -43,7 +43,8 @@ use Classes\CreateAuction;
                 $_POST["description"],
                 $_POST["price"],
                 $_POST["auction_start"],
-                $_POST["auction_end"]
+                $_POST["auction_end"],
+                $_POST["image"]
             );
 
             $newCar->create_auction(
@@ -55,7 +56,8 @@ use Classes\CreateAuction;
                 $_SESSION['userid'],
                 $_POST["price"],
                 $_POST["auction_start"],
-                $_POST["auction_end"]
+                $_POST["auction_end"],
+                $_POST["image"]
             );
         }
         ?>
@@ -98,6 +100,12 @@ use Classes\CreateAuction;
             <div class="form-outline mb-4">
                 <input type="number" id="form6Example6" class="form-control" name="price" />
                 <label class="form-label" for="form6Example6">Price</label>
+            </div>
+
+            <!-- image input -->
+            <div class=" mb-4">
+                <label class="form-label" for="customFile">Image</label>
+                <input type="file" class="form-control" id="customFile" name="image" />
             </div>
 
             <!-- Auction start input -->

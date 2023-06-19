@@ -13,24 +13,7 @@ $query = $dbh->prepare("SELECT * FROM `cars`
 $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
-
 ?>
-
-<?php foreach ($result as $element) { ?>
-    <?php echo $element['id']; ?>
-    <?php echo $element['make']; ?>
-    <?php echo $element['model']; ?>
-    <?php echo $element['power']; ?>
-    <?php echo $element['year']; ?>
-    <?php echo $element['description']; ?>
-    <?php echo $element['price']; ?>
-    <?php echo $element['auction_start']; ?>
-    <?php echo $element['auction_end']; ?>
-<?php } ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -60,7 +43,10 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $id = $element['id'];
         $url = "create_bid_index.php?id=" . urlencode($id);
 
+
     ?>
+
+
         <div class="projcard-container">
             <a href=<?php echo $url; ?>>
                 <div class="projcard projcard-blue">
