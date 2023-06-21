@@ -27,9 +27,9 @@ use Classes\Register;
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="bodyy">
     <?php
-    require_once __DIR__."/Menu/nav.php"
+    require_once __DIR__ . "/Menu/nav.php"
     ?>
 
     <div class="container">

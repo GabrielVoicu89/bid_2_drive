@@ -2,7 +2,6 @@
 
 namespace View;
 
-
 require_once __DIR__ . "/Classes/CreateBid.php";
 
 use Classes\CreateBid;
@@ -25,36 +24,50 @@ use Classes\CreateBid;
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <?php
-    require_once __DIR__ . "/Menu/nav.php"
-    ?>
+<body class="bodyy">
+    <?php require_once __DIR__ . "/Menu/nav.php"; ?>
+    <?php CreateBid::show_car($_GET["id"]); ?>
+    <div class="w-25">
+        <form action="create_bid_index.php?id=<?php echo $_GET["id"]; ?>" method="POST" class="row g-1 mt-2">
+            <div class="col">
+                <!-- Bid input -->
+                <div class="form-outline ">
+                    <input type="number" id="bid" class="form-control" name="bid" min="1" required />
+                    <label class="form-label" for="bid">Bid</label>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Bid button -->
+                <div class="form-outline">
+                    <input class="btn btn-primary" type="submit" value="BID">
+                </div>
+            </div>
+        </form>
+        <div>
 
-    <form action="create_bid_index.php?id=<?php echo $_GET['id'] ?>" method="POST">
-        <input type="text" id="bid" class="form-control" name="bid" required />
-        <input type="submit" value="envoyer">
-    </form>
-    <?php
+
+
+
+        </div>
+
+    </div>
 
 
 
 
+
+
+    <?php // if send a bid we display this
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $newBid = new CreateBid(
-            $_POST["bid"]
-        );
-
-        $newBid->create_bid(
-            $_GET['id'],
-            $_POST["bid"],
-            $_SESSION['userid']
-        );
+        $newBid = new CreateBid($_POST["bid"]);
+        // creating bid and displaying it in same time
+        $newBid->create_bid($_GET["id"], $_POST["bid"], $_SESSION["userid"]);
+        // static page
     } else {
-        CreateBid::show_bids($_GET['id']);
-        echo '<br>';
-        CreateBid::check_status($_GET['id']);
-    }
-    ?>
+        CreateBid::show_bids($_GET["id"]);
+
+        CreateBid::check_status($_GET["id"]);
+    } ?>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
 </body>
 

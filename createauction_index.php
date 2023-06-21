@@ -26,11 +26,11 @@ use Classes\CreateAuction;
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="CreateAuction">
     <?php
     require_once __DIR__ . "/Menu/nav.php"
     ?>
-    <div class="container">
+    <div class="container mt-2">
         <h1 class="mb-3">Create auction</h1>
         <?php
 
