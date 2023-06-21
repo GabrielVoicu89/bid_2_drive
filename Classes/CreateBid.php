@@ -172,15 +172,31 @@ class CreateBid
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             ?>
-                <h3>Last bid was made by <?php echo $result[0]['username'] ?></h3>
 
-    <?php
 
-            var_dump(($result[0]));
+                <div class="card mt-3">
+                    <div class="card-body">
 
-            echo "<h3>All bids</h3>";
-            var_dump($result);
-        }
-    }
+                        <h3>Last bid was made by <?php echo $result[0]['username'] ?></h3>
+                        <h5>Amount : <?php echo $result[0]['bid'] . " " . "$" ?> </h5>
+                        <h5>Final price : <?php echo $result[0]['final_price'] . " " . "$" ?> </h5>
+                    </div>
+
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <?php
+                        echo '<h3>All bids</h3>';
+                        foreach ($result as $value) {
+                        ?>
+                            <h5><?php echo $value['username'] ?> bided <?php echo $value['bid'] . " " . "$" ?> </h5>
+
+
+                    <?php
+                        }
+                    }   ?>
+                    </div>
+
+                </div>
+        <?php   }
 }
-    ?>

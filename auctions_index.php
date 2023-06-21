@@ -44,6 +44,8 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $id = $element['id'];
         $url = "create_bid_index.php?id=" . urlencode($id);
 
+        $base64Image = base64_encode($element['image']);
+
 
     ?>
 
@@ -52,7 +54,8 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
             <a href=<?php echo $url; ?>>
                 <div class="projcard projcard-blue">
                     <div class="projcard-innerbox">
-                        <img class="projcard-img" src='<?php echo $element["image"]; ?>' />
+                        <?php echo '<img class="projcard-img" src="data:image/jpeg;base64,' . $base64Image . '" alt="Image" />'; ?>
+
                         <div class="projcard-textbox">
 
 

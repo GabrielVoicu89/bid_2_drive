@@ -22,9 +22,21 @@
   transition: var(--mdb-breadcrumb-item-transition);
 }
 
-.form-outline {
-  background-color: #fff;
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  color: var(--mdb-btn-active-color);
+  background-color: #231b34;
 }
+.form-outline {
+  background-color: #ffffff00;
+}
+.form-outline .form-control {
+  background: white;
+}
+
 .navbar {
   margin-bottom: 15px;
 }
