@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-session_start();
+
 include_once __DIR__ . "/../DB/Database.php";
 
 
@@ -83,7 +83,7 @@ class CreateBid
             //condition to check the auction end
             $id = $element['id'];
             $url = "create_bid_index.php?id=" . urlencode($id);
-
+            $base64Image = base64_encode($element['image']);
 
 ?>
 
@@ -92,7 +92,7 @@ class CreateBid
                 <a href=<?php echo $url; ?>>
                     <div class="projcard projcard-blue">
                         <div class="projcard-innerbox">
-                            <img class="projcard-img" src="https://picsum.photos/800/600?image=1041" />
+                            <?php echo '<img class="projcard-img" src="data:image/jpeg;base64,' . $base64Image . '" alt="Image" />'; ?>
                             <div class="projcard-textbox">
 
 

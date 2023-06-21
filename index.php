@@ -2,6 +2,8 @@
 
 namespace View;
 
+session_start();
+
 require_once __DIR__ . "/Classes/Register.php";
 
 use Classes\Register;

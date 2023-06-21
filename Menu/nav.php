@@ -10,21 +10,37 @@ namespace View;
     <div class="container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">
+
+                <?php if (!isset($_SESSION['userid'])) {
+                    echo ' <li class="breadcrumb-item">
                     <a href="index.php">Register/Index</a>
-                </li>
-                <li class="breadcrumb-item">
+                </li>';
+                } ?>
+                <?php if (!isset($_SESSION['userid'])) {
+                    echo '<li class="breadcrumb-item">
                     <a href="login_index.php">Login</a>
-                </li>
-                <li class="breadcrumb-item">
+                </li>';
+                } ?>
+                <?php if (isset($_SESSION['userid'])) {
+                    echo '<li class="breadcrumb-item">
                     <a href="createauction_index.php">Create Auction</a>
-                </li>
-                <li class="breadcrumb-item">
+                </li>';
+                } ?>
+                <?php if (isset($_SESSION['userid'])) {
+                    echo '<li class="breadcrumb-item">
                     <a href="auctions_index.php">Auctions</a>
-                </li>
-                <li class="breadcrumb-item">
+                </li>';
+                } ?>
+
+
+
+
+
+                <?php if (isset($_SESSION['userid'])) {
+                    echo '<li class="breadcrumb-item">
                     <a href="logout.php">Logout</a>
-                </li>
+                </li>';
+                } ?>
             </ol>
         </nav>
     </div>

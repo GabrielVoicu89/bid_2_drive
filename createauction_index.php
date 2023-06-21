@@ -3,6 +3,11 @@
 
 namespace View;
 
+session_start();
+if (!isset($_SESSION['userid'])) {
+    header('Location: login_index.php');
+    die();
+}
 
 
 require_once __DIR__ . "/Classes/CreateAuction.php";
@@ -35,6 +40,7 @@ use Classes\CreateAuction;
         <?php
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
             $newCar = new CreateAuction(
                 $_POST["make"],
                 $_POST["model"],
@@ -44,7 +50,7 @@ use Classes\CreateAuction;
                 $_POST["price"],
                 $_POST["auction_start"],
                 $_POST["auction_end"],
-                $_POST["image"]
+                $_FILES['image']['tmp_name']
             );
 
             $newCar->create_auction(
@@ -57,11 +63,11 @@ use Classes\CreateAuction;
                 $_POST["price"],
                 $_POST["auction_start"],
                 $_POST["auction_end"],
-                $_POST["image"]
+                $_FILES['image']['tmp_name']
             );
         }
         ?>
-        <form action="createauction_index.php" method="POST">
+        <form action="createauction_index.php" method="POST" enctype="multipart/form-data">
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">
                 <div class="col">

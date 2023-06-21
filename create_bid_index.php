@@ -2,6 +2,12 @@
 
 namespace View;
 
+session_start();
+if (!isset($_SESSION['userid'])) {
+    header('Location: login_index.php');
+    die();
+}
+
 require_once __DIR__ . "/Classes/CreateBid.php";
 
 use Classes\CreateBid;

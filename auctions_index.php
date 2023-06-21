@@ -2,6 +2,12 @@
 
 namespace View;
 
+session_start();
+if (!isset($_SESSION['userid'])) {
+    header('Location: login_index.php');
+    die();
+}
+
 include_once __DIR__ . "/DB/Database.php";
 
 use Db\Database;
@@ -39,20 +45,18 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
     ?>
     <h1>Auctions</h1>
-    <?php foreach ($result as $element) {
-        //condition to check the auction end
-        $id = $element['id'];
-        $url = "create_bid_index.php?id=" . urlencode($id);
-
-        $base64Image = base64_encode($element['image']);
-
-
-    ?>
+    <div class="projcard-container">
+        <?php foreach ($result as $element) {
+            //condition to check the auction end
+            $id = $element['id'];
+            $url = "create_bid_index.php?id=" . urlencode($id);
+            $base64Image = base64_encode($element['image']);
+        ?>
 
 
-        <div class="projcard-container">
-            <a href=<?php echo $url; ?>>
-                <div class="projcard projcard-blue">
+            <div class="projcard projcard-blue">
+                <a href=<?php echo $url; ?>>
+
                     <div class="projcard-innerbox">
                         <?php echo '<img class="projcard-img" src="data:image/jpeg;base64,' . $base64Image . '" alt="Image" />'; ?>
 
@@ -106,21 +110,22 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+
         <?php } ?>
 
+    </div>
 
 
 
 
 
 
-        </div>
 
-        <!-- Pills content -->
-        <!-- MDB -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+    <!-- Pills content -->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
 
 
 

@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-session_start();
+
 
 include_once __DIR__ . "/../DB/Database.php";
 
@@ -44,7 +44,9 @@ class CreateAuction
         $query = $dbh->prepare("INSERT 
             INTO `cars` (`make`, `model`, `power`,`year`,`description`,`seller_id`,`price`, `auction_start` , `auction_end`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?) 
             ");
-        $query->execute([$make, $model, $power, $year, $description, $seller_id, $price, $auction_start, $auction_end, $image]);
+        $image_data = file_get_contents($image);
+
+        $query->execute([$make, $model, $power, $year, $description, $seller_id, $price, $auction_start, $auction_end, $image_data]);
     }
 }
 // var_export
