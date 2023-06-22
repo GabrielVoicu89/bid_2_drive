@@ -32,10 +32,6 @@ namespace View;
                 </li>';
                 } ?>
 
-
-
-
-
                 <?php if (isset($_SESSION['userid'])) {
                     echo '<li class="breadcrumb-item">
                     <a href="logout.php">Logout</a>

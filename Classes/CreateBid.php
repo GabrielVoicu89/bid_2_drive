@@ -30,7 +30,8 @@ class CreateBid
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         if ($result[0]['auction_end'] < date('Y-m-d H:i:s')) {
-            echo "<h3>You can't bid anymore since the auction ended.</h3>";
+
+            echo '    <h3 class="alert alert-danger mt-3">You cant bid anymore since the auction ended.</h3>';
         } else {
             // select * from bids_history where $car_id = GET['id']
             $query = $dbh->prepare("SELECT * FROM `bids_history` WHERE `car_id` = ? ");
@@ -68,7 +69,11 @@ class CreateBid
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         if ($result[0]['auction_end'] < date('Y-m-d H:i:s')) {
-            echo "<h3>The auction ended.</h3>";
+            echo '
+
+                <h3 class="alert alert-danger">This auction has ended.</h3>
+
+        ';
         }
     }
     // display the car
@@ -154,9 +159,16 @@ class CreateBid
         $query->execute([$car_id]);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        if (count($result) === 0) {
-            echo "<h3>This auction has no bids yet.</h3>";
-        } else {
+        if (count($result) === 0) { ?>
+                <div class="card mt-3">
+                    <div class="card-body">
+
+                        <h3>This auction has no bids yet.</h3>
+
+                    </div>
+                </div>
+
+            <?php } else {
             //join
             $query = $dbh->prepare("SELECT 
             users.username,
@@ -176,10 +188,12 @@ class CreateBid
 
                 <div class="card mt-3">
                     <div class="card-body">
-
-                        <h3>Last bid was made by <?php echo $result[0]['username'] ?></h3>
-                        <h5>Amount : <?php echo $result[0]['bid'] . " " . "$" ?> </h5>
-                        <h5>Final price : <?php echo $result[0]['final_price'] . " " . "$" ?> </h5>
+                        <?php
+                        $last = end($result);
+                        ?>
+                        <h3>Last bid was made by <?php echo $last['username'] ?></h3>
+                        <h5>Amount : <?php echo $last['bid'] . " " . "$" ?> </h5>
+                        <h5>Final price : <?php echo $last['final_price'] . " " . "$" ?> </h5>
                     </div>
 
                 </div>
